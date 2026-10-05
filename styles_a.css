@@ -1,0 +1,385 @@
+/* ==========================================================================
+   VARIABLES Y CONFIGURACIÓN GLOBAL
+   ========================================================================== */
+:root {
+    /* Paleta profesional: Slate (gris azulado) como base, con acentos vibrantes pero controlados */
+    --color-bg: #f8fafc;
+    --color-surface: #ffffff;
+    --color-text-primary: #0f172a;
+    --color-text-secondary: #475569;
+    
+    /* Acentos solicitados (tonos modernos y no saturados) */
+    --color-accent-red: #ef4444;
+    --color-accent-green: #10b981;
+    --color-accent-blue: #3b82f6;
+    --color-hero-bg: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+    
+    /* Sombras suaves y profesionales */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    
+    /* Bordes sutiles */
+    --border-light: 1px solid #e2e8f0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    background-color: var(--color-bg);
+}
+
+h1, h2, h3 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--color-text-primary);
+    line-height: 1.2;
+}
+
+/* ==========================================================================
+   CABECERA (HERO) Y ANIMACIÓN DE OLAS
+   ========================================================================== */
+.hero {
+    background: var(--color-hero-bg);
+    color: #ffffff;
+    text-align: center;
+    padding: 5rem 1rem 8rem 1rem; /* Padding extra abajo para las olas */
+    position: relative;
+    overflow: hidden;
+}
+
+.logo {
+    max-width: 120px;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+}
+
+.profile-photo {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-lg);
+    background-color: #cbd5e1;
+}
+
+.hero h1 {
+    color: #ffffff;
+    font-size: 2.75rem;
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+}
+
+.tagline {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-primary {
+    display: inline-block;
+    background-color: var(--color-accent-red);
+    color: #ffffff;
+    padding: 0.875rem 2rem;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px 0 rgba(239, 68, 68, 0.39);
+}
+
+.btn-primary:hover {
+    background-color: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px 0 rgba(239, 68, 68, 0.5);
+}
+
+/* Animación de olas SVG */
+.wave-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.wave-container svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 80px;
+}
+
+.parallax > use {
+    animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+}
+.parallax > use:nth-child(1) { animation-delay: -2s; animation-duration: 7s; }
+.parallax > use:nth-child(2) { animation-delay: -3s; animation-duration: 10s; }
+.parallax > use:nth-child(3) { animation-delay: -4s; animation-duration: 13s; }
+.parallax > use:nth-child(4) { animation-delay: -5s; animation-duration: 20s; }
+
+@keyframes move-forever {
+    0% { transform: translate3d(-90px,0,0); }
+    100% { transform: translate3d(85px,0,0); }
+}
+
+/* ==========================================================================
+   NAVEGACIÓN (Glassmorphism)
+   ========================================================================== */
+.navbar {
+    position: sticky;
+    top: 20px;
+    z-index: 100;
+    margin: 0 auto;
+    max-width: 800px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 50px;
+    border: var(--border-light);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: var(--shadow-lg);
+    top: 10px;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.75rem 1.5rem;
+}
+
+.navbar a {
+    color: var(--color-text-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.navbar a:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: var(--color-accent-blue);
+}
+
+/* ==========================================================================
+   SECCIONES PRINCIPALES
+   ========================================================================== */
+.section {
+    padding: 5rem 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.section h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.section h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-accent-red), var(--color-accent-blue));
+    margin: 0.5rem auto 0;
+    border-radius: 2px;
+}
+
+.content-box {
+    background: var(--color-surface);
+    padding: 2.5rem;
+    border-radius: 16px;
+    border: var(--border-light);
+    box-shadow: var(--shadow-sm);
+}
+
+.content-box p {
+    margin-bottom: 1.25rem;
+    font-size: 1.1rem;
+}
+
+.content-box p:last-child {
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+   TARJETAS DE EXPERIENCIA
+   ========================================================================== */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: var(--color-surface);
+    padding: 2rem;
+    border-radius: 16px;
+    border: var(--border-light);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-accent-green), var(--color-accent-blue));
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+/* ==========================================================================
+   LISTA DE GUSTOS
+   ========================================================================== */
+.likes-list {
+    list-style: none;
+    padding: 0;
+}
+
+.likes-list li {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.likes-list li:last-child {
+    margin-bottom: 0;
+}
+
+.accent-red { color: var(--color-accent-red); font-size: 1.3rem; }
+.accent-green { color: var(--color-accent-green); font-size: 1.3rem; }
+.accent-blue { color: var(--color-accent-blue); font-size: 1.3rem; }
+
+/* ==========================================================================
+   PIE DE PÁGINA
+   ========================================================================== */
+footer {
+    background-color: var(--color-text-primary);
+    color: #cbd5e1;
+    text-align: center;
+    padding: 4rem 1.5rem;
+    margin-top: 4rem;
+}
+
+.footer-content p {
+    margin-bottom: 1rem;
+}
+
+.email-link {
+    color: var(--color-accent-blue);
+    font-size: 1.5rem;
+    text-decoration: none;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    display: inline-block;
+    margin: 1rem 0;
+    transition: color 0.3s ease;
+}
+
+.email-link:hover {
+    color: var(--color-accent-red);
+}
+
+.copyright {
+    font-size: 0.875rem;
+    opacity: 0.6;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 2rem;
+}
+
+/* ==========================================================================
+   ANIMACIONES DE SCROLL (REVEAL)
+   ========================================================================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2rem; }
+    .tagline { font-size: 1.1rem; }
+    
+    .navbar {
+        top: 10px;
+        border-radius: 16px;
+        margin: 0 1rem;
+    }
+    
+    .navbar ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem;
+    }
+    
+    .navbar a {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .content-box { padding: 1.5rem; }
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio profesional de Juan Manuel Tudó Fernández, estudiante de DAM en el IES Simarro con 26 años de experiencia en informática.">
+    <title>Juan Manuel Tudó Fernández | Desarrollador DAM</title>
+    
+    <!-- Tipografías profesionales de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- CABECERA: Logo, nombre y frase con animación de ola -->
+    <header class="hero">
+        <div class="hero-content">
+            <!-- NOTA: Guarda el logo que generé en tu carpeta 'imagenes' como 'logo.png' -->
+            <img src="imagenes/logo.png" alt="Logo JMTF" class="logo" onerror="this.style.display='none'">
+            
+            <!-- NOTA: Guarda tu foto en 'imagenes' como 'perfil.jpg' -->
+            <img src="./imagenes/perfil.jpeg" alt="Juan Manuel Tudó Fernández" class="profile-photo" onerror="this.src='https://via.placeholder.com/150/3b82f6/ffffff?text=JMTF'">
+            
+            <h1>Juan Manuel Tudó Fernández</h1>
+            <p class="tagline">"Dividir problemas, crear soluciones. 26 años de experiencia, ahora programando el futuro."</p>
+            <a href="#contacto" class="btn-primary">Contactar</a>
+        </div>
+        
+        <!-- Animación de ola del mar en la parte inferior de la cabecera -->
+        <div class="wave-container">
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                <defs>
+                    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                </defs>
+                <g class="parallax">
+                    <use href="#gentle-wave" x="48" y="0" fill="rgba(248, 250, 252, 0.7)" />
+                    <use href="#gentle-wave" x="48" y="3" fill="rgba(248, 250, 252, 0.5)" />
+                    <use href="#gentle-wave" x="48" y="5" fill="rgba(248, 250, 252, 0.3)" />
+                    <use href="#gentle-wave" x="48" y="7" fill="#f8fafc" />
+                </g>
+            </svg>
+        </div>
+    </header>
+
+    <!-- NAVEGACIÓN: Banner flotante con efecto cristal -->
+    <nav class="navbar" id="navbar">
+        <ul>
+            <li><a href="#sobre-mi">Sobre mí</a></li>
+            <li><a href="#experiencia">Lo que he hecho</a></li>
+            <li><a href="#gustos">Me gusta</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- SECCIÓN: Sobre mí -->
+        <section id="sobre-mi" class="section reveal">
+            <h2>Sobre mí</h2>
+            <div class="content-box">
+                <p>
+                    Soy estudiante de 1º de Desarrollo de Aplicaciones Multiplataforma (DAM) en el IES Simarro. 
+                    Tras 26 años trabajando en el sector informático para empresas líderes como Epson, HP y Lenovo, 
+                    he decidido dar un nuevo giro a mi carrera profesional.
+                </p>
+                <p>
+                    Creo firmemente que programar es el arte de dividir los problemas en partes pequeñas para encontrar 
+                    soluciones eficaces. Mi objetivo es aplicar esta lógica para desarrollar herramientas que ayuden a 
+                    las personas a resolver sus desafíos diarios. Soy una persona con la mente abierta, con ganas de 
+                    aprender y de adaptar mi amplia experiencia a las nuevas tecnologías.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: Lo que he hecho -->
+        <section id="experiencia" class="section reveal">
+            <h2>Lo que he hecho</h2>
+            <div class="cards-container">
+                <article class="card">
+                    <div class="card-icon">💻</div>
+                    <h3>Trayectoria Informática</h3>
+                    <p>Soporte técnico y desarrollo de labores informáticas en empresas de primer nivel como Epson, HP y Lenovo.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">🛠️</div>
+                    <h3>Formación Técnica</h3>
+                    <p>Cursos especializados en instalación de aire acondicionado y mantenimiento industrial, demostrando versatilidad y capacidad de aprendizaje continuo.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">🏀</div>
+                    <h3>Deporte y Voluntariado</h3>
+                    <p>Jugador de baloncesto en mi etapa escolar y auxiliar de carreras en el Circuito de la Comunitat (Cheste), fomentando el trabajo en equipo y la organización.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: Me gusta -->
+        <section id="gustos" class="section reveal">
+            <h2>Me gusta</h2>
+            <div class="content-box">
+                <ul class="likes-list">
+                    <li>
+                        <span class="accent-red">🌊</span> 
+                        <strong>Naturaleza:</strong> Paseos por la playa, rutas de montaña y el cuidado de mis mascotas (perros y gatos).
+                    </li>
+                    <li>
+                        <span class="accent-green">📺</span> 
+                        <strong>Ocio:</strong> Series de policías con un toque de humor, como Casel, El Mentalista o The Rookie.
+                    </li>
+                    <li>
+                        <span class="accent-blue">🚐</span> 
+                        <strong>Sueños:</strong> Viajar en autocaravana, explorar nuevos horizontes y tener la libertad de ayudar a quienes lo necesitan.
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- PIE DE PÁGINA: Información de contacto -->
+    <footer id="contacto">
+        <div class="footer-content">
+            <p>¿Hablamos? Estoy abierto a nuevas oportunidades y colaboraciones.</p>
+            <a href="mailto:juatudfer@alu.edu.gva.es" class="email-link">juatudfer@alu.edu.gva.es</a>
+            <p class="copyright">&copy; 2026 Juan Manuel Tudó Fernández. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

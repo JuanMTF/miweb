@@ -1,0 +1,20 @@
+Quiero crear mi web personal de marca con HTML, CSS y JS puros. Voy a gestionar yo los ficheros,
+así que dame el código completo de cada fichero en un bloque, sin explicaciones largas.
+
+Ficha: soy Juan Manuel Tudó Fernández, del ciclo de 1º DAM del IES Simarro.
+Cosas que he hecho: Trabajado en informático en Empresas como Epson, Hp, Lenovo ,
+ he realizado cursos de Instalación de aire acondicionado, cursos online varios antenimieto de industra.
+ juge a baloncesto en mi paso por el colegio, tambien estube en el circuito de cheste de auxiliar de carreras
+Me gusta: Paseos en la playa , montaña , mascotas (perros y gatos), me gusta las series de policias pero
+ graciaosas como (casel, el metalista, the rocky), me gustaria viajar en atocarvana 
+Quiero ser / me interesa: en realidad me gustaria ser rico y no trabajar solo viajar y no preocuparme de nada
+podria ayudar a las personas que lo necesiten. pero como no soy rico otra forma es estudiando Dam ya que la 
+definicion de programar es dividir los problemas en pequeños y buscar solucion. es muy buena politica, asi 
+con los programas podria solucionar problemas de la gente
+Colores/estilo: mi color preferido es el rojo, el verde las plantas y el azul del mar o del cielo, necesito
+web profesional pero que me represente , persiona que llevo 26 años trabajando y ahora me apunto a dam, con ganas
+la mente abierta a nuevas cosas,  Con Alguna foto; preguntame o pideme las fotos para añadirlas y asi puedas colocarlas ya 
+
+Haz el index.html con: cabecera (nombre + frase), "Sobre mí", "Lo que he hecho",
+"Me gusta", un pie de página con contacto juatudfer@alu.edu.gva.es . HTML semántico, etiquetas comentadas.
+coloca parrafos mejorando lo que yo te he explicado, y pregunta si tienes dudas 
