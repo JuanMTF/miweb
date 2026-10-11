@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
     // 1. Desplazamiento suave (smooth scroll)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -58,14 +57,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const times = data.hourly.time;
             const temps = data.hourly.temperature_2m;
             const codes = data.hourly.weathercode;
-
+            
             let html = '';
             for (let i = 0; i < 12; i++) {
                 const date = new Date(times[i]);
                 const hour = date.getHours().toString().padStart(2, '0') + ':00';
                 const temp = Math.round(temps[i]);
                 const emoji = getWeatherEmoji(codes[i]);
-
+                
                 html += `
                     <div class="weather-hour-item">
                         <div class="hour-time">${hour}</div>
@@ -128,9 +127,9 @@ document.addEventListener('DOMContentLoaded', () => {
     async function renderNews() {
         const grid = document.getElementById('news-grid');
         grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center;">Traduciendo noticias...</p>';
-
+        
         const langpair = currentLang === 'es' ? 'en|es' : 'en|ca';
-
+        
         const translatedNews = await Promise.all(rawNews.map(async (hit) => {
             let translatedTitle = hit.title;
             try {
@@ -140,16 +139,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     translatedTitle = data.responseData.translatedText;
                 }
             } catch (e) { /* Fallback to English */ }
-
-            // Usamos Google Favicons API (Siempre funciona, no deja imágenes en blanco)
+            
             const domain = getDomain(hit.url);
             const faviconUrl = hit.url 
                 ? `https://www.google.com/s2/favicons?domain=${domain}&sz=64` 
                 : 'https://via.placeholder.com/64/1e3a8a/ffffff?text=N';
-
+            
             return { ...hit, translatedTitle, domain, faviconUrl };
         }));
-
+        
         let html = '';
         translatedNews.forEach(item => {
             html += `

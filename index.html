@@ -7,32 +7,34 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- HERO / CABECERA -->
+    <!-- HERO SECTION -->
     <header class="hero">
         <div class="hero-content">
             <div class="hero-header">
                 <img src="./imagenes/logo.png" alt="Logo" class="logo">
-                <img src="./imagenes/perfil.jpeg" alt="Foto de perfil" class="profile-photo">
+                <img src="./imagenes/perfil.jpeg" alt="Juan Manuel Tudó Fernández" class="profile-photo">
             </div>
             <h1>Juan Manuel Tudó Fernández</h1>
             <p class="tagline">"Dividir problemas, crear soluciones. 26 años de experiencia, ahora programando el futuro."</p>
             <a href="#contacto" class="btn-primary">Contactar</a>
         </div>
         
-        <!-- OLA ANIMADA (Más suave y menos alta) -->
+        <!-- Ola Animada -->
         <div class="wave-container">
-            <svg class="parallax" viewBox="0 0 500 50" preserveAspectRatio="none" style="height: 100%; width: 100%;">
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 150 60" preserveAspectRatio="none" shape-rendering="auto">
                 <defs>
-                    <path id="wavePath" d="M0,20 C150,40 350,0 500,20 L500,50 L0,50 Z"></path>
+                    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
                 </defs>
-                <use href="#wavePath" x="0" y="0" fill="rgba(255,255,255,0.1)"></use>
-                <use href="#wavePath" x="0" y="2" fill="rgba(255,255,255,0.2)"></use>
-                <use href="#wavePath" x="0" y="4" fill="rgba(255,255,255,0.3)"></use>
-                <use href="#wavePath" x="0" y="6" fill="var(--color-bg-start)"></use>
+                <g class="parallax">
+                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
+                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+                    <use xlink:href="#gentle-wave" x="48" y="7" fill="#ffffff" />
+                </g>
             </svg>
         </div>
     </header>
@@ -47,8 +49,8 @@
         </ul>
     </nav>
 
-    <!-- PANEL TIEMPO (MULTICIUDAD) -->
-    <section id="panel-tiempo" class="section reveal">
+    <!-- TIEMPO MULTICIUDAD -->
+    <section class="section reveal" id="tiempo">
         <h2>Previsión 12 Horas</h2>
         <div class="city-selector" id="city-selector">
             <button class="city-btn active" data-city="valencia">Valencia</button>
@@ -59,13 +61,13 @@
             <button class="city-btn" data-city="barcelona">Barcelona</button>
             <button class="city-btn" data-city="albacete">Albacete</button>
         </div>
-        <div id="weather-hourly" class="weather-hourly-container">
-            <p>Cargando previsión meteorológica...</p>
+        <div class="weather-hourly-container" id="weather-hourly">
+            <p style="padding: 1rem;">Cargando previsión meteorológica...</p>
         </div>
     </section>
 
     <!-- SOBRE MÍ -->
-    <section id="sobre-mi" class="section reveal">
+    <section class="section reveal" id="sobre-mi">
         <h2>Sobre mí</h2>
         <div class="content-box">
             <p>Soy estudiante de 1º de Desarrollo de Aplicaciones Multiplataforma (DAM) en el IES Simarro. 
@@ -78,22 +80,22 @@
         </div>
     </section>
 
-    <!-- PANEL NOTICIAS (DISEÑO PRO COMPACTO) -->
-    <section id="panel-noticias" class="section reveal">
+    <!-- NOTICIAS TECH & IA -->
+    <section class="section reveal" id="noticias">
+        <h2>Actualidad Tech & IA</h2>
         <div class="news-header">
-            <h2 style="margin-bottom: 0;">Actualidad Tech & IA</h2>
             <div class="lang-toggle">
                 <button id="btn-es" class="active">Español</button>
                 <button id="btn-ca">Català</button>
             </div>
         </div>
-        <div id="news-grid" class="news-grid-pro">
-            <p>Cargando noticias...</p>
+        <div class="news-grid-pro" id="news-grid">
+            <p style="grid-column: 1/-1; text-align:center;">Cargando noticias...</p>
         </div>
     </section>
 
     <!-- EXPERIENCIA -->
-    <section id="experiencia" class="section reveal">
+    <section class="section reveal" id="experiencia">
         <h2>Lo que he hecho</h2>
         <div class="cards-container">
             <div class="card">
@@ -115,26 +117,33 @@
     </section>
 
     <!-- GUSTOS -->
-    <section id="gustos" class="section reveal">
+    <section class="section reveal" id="gustos">
         <h2>Me gusta</h2>
         <div class="content-box">
             <ul class="likes-list">
-                <li><span class="accent-blue">🌊</span> <strong>Naturaleza:</strong> Paseos por la playa, rutas de montaña y el cuidado de mis mascotas (perros y gatos).</li>
-                <li><span class="accent-red">📺</span> <strong>Ocio:</strong> Series de policías con un toque de humor, como Casel, El Mentalista o The Rookie.</li>
-                <li><span class="accent-green">🚐</span> <strong>Sueños:</strong> Viajar en autocaravana, explorar nuevos horizontes y tener la libertad de ayudar a quienes lo necesitan.</li>
+                <li>
+                    <span class="accent-blue">🌊</span>
+                    <div><strong>Naturaleza:</strong> Paseos por la playa, rutas de montaña y el cuidado de mis mascotas (perros y gatos).</div>
+                </li>
+                <li>
+                    <span class="accent-red">📺</span>
+                    <div><strong>Ocio:</strong> Series de policías con un toque de humor, como Casel, El Mentalista o The Rookie.</div>
+                </li>
+                <li>
+                    <span class="accent-green">🚐</span>
+                    <div><strong>Sueños:</strong> Viajar en autocaravana, explorar nuevos horizontes y tener la libertad de ayudar a quienes lo necesitan.</div>
+                </li>
             </ul>
         </div>
     </section>
 
-    <!-- FOOTER / CONTACTO -->
+    <!-- CONTACTO -->
     <footer id="contacto">
         <div class="footer-content">
-            <h2 style="color: #ffffff; margin-bottom: 1rem;">¿Hablamos?</h2>
+            <h2>¿Hablamos?</h2>
             <p>Estoy abierto a nuevas oportunidades y colaboraciones.</p>
             <a href="mailto:juatudfer@alu.edu.gva.es" class="email-link">juatudfer@alu.edu.gva.es</a>
-            <div class="copyright">
-                <p>© 2026 Juan Manuel Tudó Fernández. Todos los derechos reservados.</p>
-            </div>
+            <p class="copyright">© 2026 Juan Manuel Tudó Fernández. Todos los derechos reservados.</p>
         </div>
     </footer>
 
