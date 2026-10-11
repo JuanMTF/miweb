@@ -36,7 +36,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; color: var(--color-text-primary
     background: var(--color-hero-bg); 
     color: #ffffff; 
     text-align: center; 
-    padding: 4rem 1rem 8rem 1rem; 
+    padding: 4rem 1rem 10rem 1rem; 
     position: relative; 
     overflow: hidden; 
     width: 100%; 
@@ -111,7 +111,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; color: var(--color-text-primary
     box-shadow: 0 6px 20px 0 rgba(239, 68, 68, 0.5); 
 }
 
-/* --- OLA ANIMADA --- */
+/* --- OLA ANIMADA (Inferior más rápida, efecto relajante) --- */
 .wave-container {
     position: absolute;
     bottom: 0;
@@ -126,39 +126,46 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; color: var(--color-text-primary
     position: relative;
     display: block;
     width: calc(100% + 1.3px);
-    height: 80px;
+    height: 150px;
 }
 
 .parallax > use {
     animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
 }
 
+/* Capa 1 - Superior (MÁS LENTA - 20s) */
 .parallax > use:nth-child(1) {
     animation-delay: -2s;
-    animation-duration: 7s;
+    animation-duration: 20s;
 }
 
+/* Capa 2 - Intermedia superior (17s) */
 .parallax > use:nth-child(2) {
     animation-delay: -3s;
-    animation-duration: 10s;
+    animation-duration: 17s;
 }
 
+/* Capa 3 - Intermedia inferior (14s) */
 .parallax > use:nth-child(3) {
     animation-delay: -4s;
-    animation-duration: 13s;
+    animation-duration: 14s;
 }
 
+/* Capa 4 - Inferior (MÁS RÁPIDA - 12s, 1.67x más rápida que la superior) */
 .parallax > use:nth-child(4) {
     animation-delay: -5s;
-    animation-duration: 20s;
+    animation-duration: 12s;
 }
 
 @keyframes move-forever {
     0% {
         transform: translate3d(-90px, 0, 0);
     }
+    50% {
+        transform: translate3d(0px, -15px, 0);
+    }
     100% {
-        transform: translate3d(85px, 0, 0);
+        transform: translate3d(90px, 0, 0);
     }
 }
 
@@ -591,12 +598,12 @@ footer {
 
 /* --- RESPONSIVE --- */
 @media (max-width: 768px) {
-    .hero { padding: 3rem 0.5rem 6rem 0.5rem; }
+    .hero { padding: 3rem 0.5rem 8rem 0.5rem; }
     .hero h1 { font-size: 1.75rem; }
     .tagline { font-size: 1rem; }
     .logo { max-width: 70px; }
     .profile-photo { width: 100px; height: 100px; }
-    .wave-container svg { height: 60px; }
+    .wave-container svg { height: 100px; }
     .navbar { top: 10px; border-radius: 16px; margin: 0 0.5rem; width: calc(100% - 1rem); }
     .navbar ul { flex-direction: column; align-items: center; gap: 0.5rem; padding: 1rem; }
     .navbar a { width: 100%; text-align: center; display: block; }
@@ -608,4 +615,33 @@ footer {
     footer { padding: 3rem 1rem; }
     .news-header { flex-direction: column; align-items: flex-start; }
     .city-btn { padding: 0.4rem 0.9rem; font-size: 0.8rem; }
+ }
+ /* Contenedor para alinear los iconos */
+.social-links {
+    display: flex;
+    gap: 35px; /* Aumentado un poco el espacio para que respiren al ser más grandes */
+    justify-content: center; 
+    margin: 25px 0;
+}
+
+/* Estilo base de los iconos */
+.social-icon {
+    font-size: 48px; /* ¡Tamaño aumentado! (Puedes subirlo a 56px o 64px si los quieres aún más grandes) */
+    color: #ffffff; /* Blanco puro para fondo oscuro */
+    text-decoration: none;
+    transition: all 0.3s ease; 
+}
+
+/* Efecto al pasar el ratón por GitHub */
+.social-icon.github:hover {
+    color: #f0f6fc; 
+    transform: translateY(-4px); 
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.7); /* Resplandor un poco más intenso */
+}
+
+/* Efecto al pasar el ratón por LinkedIn */
+.social-icon.linkedin:hover {
+    color: #00a0dc; 
+    transform: translateY(-4px); 
+    text-shadow: 0 0 15px rgba(0, 160, 220, 0.8); /* Resplandor azul más intenso */
 }
