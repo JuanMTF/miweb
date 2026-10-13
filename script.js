@@ -173,10 +173,12 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (e) { /* Fallback to English */ }
             
             const domain = getDomain(hit.url);
+           // Icono genérico en SVG (base64) - siempre funciona, sin dependencias externas
+            const genericIcon = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iOCIgZmlsbD0iIzFlM2E4YSIvPjx0ZXh0IHg9IjMyIiB5PSI0MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI4IiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5OPC90ZXh0Pjwvc3ZnPg==';
+
             const faviconUrl = hit.url 
                 ? `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://${domain}&size=64` 
-                : 'https://via.placeholder.com/64/1e3a8a/ffffff?text=N';
-            
+                : genericIcon;            
             return { ...hit, translatedTitle, domain, faviconUrl };
         }));
         
@@ -185,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
             htmlNews += `
                 <div class="news-card-pro">
                     <div class="news-source-icon">
-                        <img src="${item.faviconUrl}" alt="${item.domain}" onerror="this.src='https://via.placeholder.com/32/1e3a8a/ffffff?text=N'">
+                        <img src="${item.faviconUrl}" alt="${item.domain}" onerror="if(this.src!=='${genericIcon}')this.src='${genericIcon}'">
                     </div>
                     <div class="news-card-text">
                         <a href="${item.url || '#'}" target="_blank" rel="noopener noreferrer">${item.translatedTitle}</a>
@@ -302,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (text.includes('quien eres') || text.includes('que eres') || text.includes('tu eres') || text.includes('tu eres') || text.includes('chatbot') || text.includes('bot')) {
-                return 'Soy <strong>JuanManuelBot</strong>, un chatbot local creado para esta web. Respondo preguntas sobre el proyecto, la experiencia y cómo comparar esta versión moderna con la original.';
+                return 'Soy <strong>JuanMai</strong>, un chatbot local creado para esta web. Respondo preguntas sobre el proyecto, la experiencia y cómo comparar esta versión moderna con la original.';
             }
 
             if (text.includes('sobre mi') || text.includes('sobre ti') || text.includes('tudó') || text.includes('tudo') || text.includes('juan manuel') || text.includes('dam') || text.includes('simarro') || text.includes('estudiante')) {
@@ -410,7 +412,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         addMessage(
             'assistant',
-            'Hola 👋 Soy el asistente de esta web. Puedo contarte sobre mí, la experiencia, los gustos, el contacto o cómo comparar esta versión moderna con la original.',
+            'Hola 👋 Soy <strong> JuanMai </strong> el asistente de esta web. Puedo contarte sobre mí, la experiencia, los gustos, el contacto o cómo comparar esta versión moderna con la original.',
             true
         );
     }
