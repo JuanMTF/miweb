@@ -7,11 +7,15 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- 1. Asegúrate de tener esta línea en el <head> de tu HTML (solo una vez) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+
+    <!-- BOTÓN DE TEMA -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">
+        <i class="fa-solid fa-moon"></i>
+    </button>
 
     <!-- HERO SECTION -->
     <header class="hero">
@@ -159,8 +163,35 @@
             <a href="mailto:juatudfer@alu.edu.gva.es" class="email-link">juatudfer@alu.edu.gva.es</a>
             <p class="copyright">© 2026 Juan Manuel Tudó Fernández. Todos los derechos reservados.</p>
         </div>
-        <!-- 2. Contenedor de tus redes sociales -->
     </footer>
+
+    <!-- CHATBOT -->
+    <div id="chatbot-widget" class="chatbot-widget">
+        <button id="chatbot-launcher" class="chatbot-launcher" aria-label="Abrir asistente">
+            <i class="fa-solid fa-robot"></i>
+        </button>
+
+        <div id="chatbot-panel" class="chatbot-panel" role="dialog" aria-label="Asistente web">
+            <div class="chatbot-header">
+                <div>
+                    <strong>JuanManuelBot</strong>
+                    <span>Pregúntame sobre la web o el proyecto</span>
+                </div>
+                <button id="chatbot-close" class="chatbot-close" aria-label="Cerrar asistente">✕</button>
+            </div>
+
+            <div id="chatbot-messages" class="chatbot-messages"></div>
+
+            <div id="chatbot-suggestions" class="chatbot-suggestions"></div>
+
+            <form id="chatbot-form" class="chatbot-form">
+                <input id="chatbot-input" type="text" placeholder="Escribe una pregunta..." autocomplete="off">
+                <button type="submit" aria-label="Enviar">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
