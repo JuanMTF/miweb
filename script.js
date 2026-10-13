@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const domain = getDomain(hit.url);
             const faviconUrl = hit.url 
-                ? `https://www.google.com/s2/favicons?domain=${domain}&sz=64` 
+                ? `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://${domain}&size=64` 
                 : 'https://via.placeholder.com/64/1e3a8a/ffffff?text=N';
             
             return { ...hit, translatedTitle, domain, faviconUrl };
