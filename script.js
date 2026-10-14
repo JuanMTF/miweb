@@ -86,18 +86,16 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}&hourly=temperature_2m,weathercode&forecast_hours=12&timezone=Europe/Madrid`);
             const data = await response.json();
-            
             const times = data.hourly.time;
             const temps = data.hourly.temperature_2m;
             const codes = data.hourly.weathercode;
-            
             let htmlWeather = '';
+            
             for (let i = 0; i < 12; i++) {
                 const date = new Date(times[i]);
                 const hour = date.getHours().toString().padStart(2, '0') + ':00';
                 const temp = Math.round(temps[i]);
                 const emoji = getWeatherEmoji(codes[i]);
-                
                 htmlWeather += `
                     <div class="weather-hour-item">
                         <div class="hour-time">${hour}</div>
@@ -160,6 +158,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const grid = document.getElementById('news-grid');
         grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center;">Traduciendo noticias...</p>';
         
+        // ✅ MOVIDO AQUÍ: Ahora es accesible tanto en el map como en el forEach
+        const genericIcon = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iOCIgZmlsbD0iIzFlM2E4YSIvPjx0ZXh0IHg9IjMyIiB5PSI0MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI4IiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5OPC90ZXh0Pjwvc3ZnPg==';
+        
         const langpair = currentLang === 'es' ? 'en|es' : 'en|ca';
         
         const translatedNews = await Promise.all(rawNews.map(async (hit) => {
@@ -173,9 +174,6 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (e) { /* Fallback to English */ }
             
             const domain = getDomain(hit.url);
-           // Icono genérico en SVG (base64) - siempre funciona, sin dependencias externas
-            const genericIcon = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iOCIgZmlsbD0iIzFlM2E4YSIvPjx0ZXh0IHg9IjMyIiB5PSI0MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI4IiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5OPC90ZXh0Pjwvc3ZnPg==';
-
             const faviconUrl = hit.url 
                 ? `https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://${domain}&size=64` 
                 : genericIcon;            
@@ -192,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="news-card-text">
                         <a href="${item.url || '#'}" target="_blank" rel="noopener noreferrer">${item.translatedTitle}</a>
                         <div class="news-source-domain">${item.domain}</div>
-                        <div class="news-meta-pro">Por ${item.author} • ${item.points || 0} pts</div>
+                        <div class="news-meta-pro">Por ${item.author || 'Desconocido'} • ${item.points || 0} pts</div>
                     </div>
                 </div>
             `;
@@ -262,16 +260,13 @@ document.addEventListener('DOMContentLoaded', () => {
         function addMessage(role, text, useHtml = false) {
             const wrap = document.createElement('div');
             wrap.className = `chat-message ${role}`;
-
             const bubble = document.createElement('div');
             bubble.className = 'chat-bubble';
-
             if (useHtml) {
                 bubble.innerHTML = text;
             } else {
                 bubble.textContent = text;
             }
-
             wrap.appendChild(bubble);
             messages.appendChild(wrap);
             messages.scrollTop = messages.scrollHeight;
@@ -281,11 +276,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const wrap = document.createElement('div');
             wrap.className = 'chat-message assistant';
             wrap.id = 'typing-message';
-
             const bubble = document.createElement('div');
             bubble.className = 'chat-bubble typing-indicator';
             bubble.innerHTML = '<span></span><span></span><span></span>';
-
             wrap.appendChild(bubble);
             messages.appendChild(wrap);
             messages.scrollTop = messages.scrollHeight;
@@ -298,39 +291,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function getBotResponse(message) {
             const text = normalize(message);
-
             if (text.includes('hola') || text.includes('buenas') || text.includes('hey') || text.includes('que tal')) {
                 return '¡Hola! 👋 Soy el asistente de esta web. Puedes preguntarme por <strong>sobre mí</strong>, <strong>experiencia</strong>, <strong>gustos</strong>, <strong>contacto</strong> o <strong>comparar rama</strong>.';
             }
-
-            if (text.includes('quien eres') || text.includes('que eres') || text.includes('tu eres') || text.includes('tu eres') || text.includes('chatbot') || text.includes('bot')) {
+            if (text.includes('quien eres') || text.includes('que eres') || text.includes('tu eres') || text.includes('chatbot') || text.includes('bot')) {
                 return 'Soy <strong>JuanMai</strong>, un chatbot local creado para esta web. Respondo preguntas sobre el proyecto, la experiencia y cómo comparar esta versión moderna con la original.';
             }
-
             if (text.includes('sobre mi') || text.includes('sobre ti') || text.includes('tudó') || text.includes('tudo') || text.includes('juan manuel') || text.includes('dam') || text.includes('simarro') || text.includes('estudiante')) {
                 return 'Soy estudiante de <strong>1º de DAM</strong> en el <strong>IES Simarro</strong>. Tengo <strong>26 años de experiencia</strong> en el sector informático y ahora estoy dando un nuevo giro a mi carrera hacia el desarrollo de aplicaciones.';
             }
-
             if (text.includes('experiencia') || text.includes('epson') || text.includes('hp') || text.includes('lenovo') || text.includes('trabajo') || text.includes('laboral') || text.includes('he hecho')) {
                 return 'Mi experiencia incluye soporte técnico y labores informáticas en empresas como <strong>Epson</strong>, <strong>HP</strong> y <strong>Lenovo</strong>. También tengo formación técnica en aire acondicionado y mantenimiento industrial.';
             }
-
             if (text.includes('gustos') || text.includes('me gusta') || text.includes('playa') || text.includes('mascotas') || text.includes('perros') || text.includes('gatos') || text.includes('series') || text.includes('autocaravana')) {
                 return 'Me gusta la naturaleza, pasear por la playa, cuidar de mis mascotas, ver series de policías con humor y viajar en autocaravana.';
             }
-
             if (text.includes('contacto') || text.includes('email') || text.includes('correo') || text.includes('linkedin') || text.includes('github') || text.includes('hablar')) {
                 return 'Puedes contactarme por correo: <strong>juatudfer@alu.edu.gva.es</strong>. También tienes mis enlaces a GitHub y LinkedIn en el pie de página.';
             }
-
             if (text.includes('tiempo') || text.includes('weather') || text.includes('clima') || text.includes('ciudad')) {
                 return 'La web muestra una previsión meteorológica de 12 horas usando una API. Puedes elegir entre Valencia, Alzira, Xàtiva, Carcagente, Madrid, Barcelona y Albacete.';
             }
-
             if (text.includes('noticias') || text.includes('news') || text.includes('ia') || text.includes('tech')) {
                 return 'La sección de noticias carga actualidad tech e IA desde una API y permite cambiar entre español y catalán.';
             }
-
             if (text.includes('comparar') || text.includes('rama') || text.includes('git') || text.includes('version') || text.includes('original') || text.includes('profe') || text.includes('profesor')) {
                 return `
                     <strong>Comparación con la versión original</strong><br><br>
@@ -342,35 +326,28 @@ document.addEventListener('DOMContentLoaded', () => {
                     Así la versión original queda intacta en <code>main</code>.
                 `;
             }
-
             if (text.includes('ayuda') || text.includes('help') || text.includes('opciones') || text.includes('puedes hacer')) {
                 return 'Puedo ayudarte con: <strong>Sobre mí</strong>, <strong>Experiencia</strong>, <strong>Gustos</strong>, <strong>Contacto</strong>, <strong>Tiempo</strong>, <strong>Noticias</strong> o <strong>Comparar rama</strong>.';
             }
-
             if (text.includes('gracias')) {
                 return '¡De nada! 😊 Si quieres, puedes probar otras preguntas como <strong>experiencia</strong>, <strong>gustos</strong> o <strong>comparar rama</strong>.';
             }
-
             if (text.includes('web') || text.includes('proyecto') || text.includes('pagina')) {
                 return 'Esta es una web personal con secciones de <strong>sobre mí</strong>, <strong>experiencia</strong>, <strong>gustos</strong>, <strong>tiempo</strong>, <strong>noticias</strong> y <strong>contacto</strong>. Esta versión moderna añade tema claro/oscuro y chatbot.';
             }
-
             return 'No he entendido del todo. Puedes preguntarme por <strong>sobre mí</strong>, <strong>experiencia</strong>, <strong>gustos</strong>, <strong>contacto</strong> o <strong>comparar rama</strong>.';
         }
 
         function renderSuggestions() {
             suggestions.innerHTML = '';
-
             quickReplies.forEach(text => {
                 const button = document.createElement('button');
                 button.type = 'button';
                 button.className = 'chatbot-suggestion';
                 button.textContent = text;
-
                 button.addEventListener('click', () => {
                     sendMessage(text);
                 });
-
                 suggestions.appendChild(button);
             });
         }
@@ -378,13 +355,9 @@ document.addEventListener('DOMContentLoaded', () => {
         function sendMessage(text) {
             const cleanText = (text || '').trim();
             if (!cleanText) return;
-
             addMessage('user', cleanText);
-
             if (input) input.value = '';
-
             showTyping();
-
             setTimeout(() => {
                 removeTyping();
                 const response = getBotResponse(cleanText);
@@ -409,10 +382,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         renderSuggestions();
-
         addMessage(
             'assistant',
-            'Hola 👋 Soy <strong> JuanMai </strong> el asistente de esta web. Puedo contarte sobre mí, la experiencia, los gustos, el contacto o cómo comparar esta versión moderna con la original.',
+            'Hola 👋 Soy <strong>JuanMai</strong> el asistente de esta web. Puedo contarte sobre mí, la experiencia, los gustos, el contacto o cómo comparar esta versión moderna con la original.',
             true
         );
     }
